@@ -1,2 +1,61 @@
 # TUGAS-PERT-5
 ## terdapat error di bagian gradle
+![ss pe mobile](https://github.com/user-attachments/assets/77684be3-0bc0-4223-916f-2baea715efe3)
+
+
+## code Main.Activity.tk
+''' 
+package com.example.inputcontrolapp2
+
+import android.app.AlertDialog
+import android.app.DatePickerDialog
+import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import java.util.*
+
+class MainActivity : AppCompatActivity() {
+
+    private lateinit var btnDatePicker: Button
+    private lateinit var btnAlert: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        btnDatePicker = findViewById(R.id.btnDatePicker)
+        btnAlert = findViewById(R.id.btnAlert)
+
+        btnDatePicker.setOnClickListener {
+            val calendar = Calendar.getInstance()
+            val year = calendar.get(Calendar.YEAR)
+            val month = calendar.get(Calendar.MONTH)
+            val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+            val datePickerDialog = DatePickerDialog(this,
+                { _, selectedYear, selectedMonth, selectedDay ->
+                    val date = "$selectedDay/${selectedMonth + 1}/$selectedYear"
+                    Toast.makeText(this, "Tanggal Dipilih: $date", Toast.LENGTH_SHORT).show()
+                },
+                year, month, day
+            )
+            datePickerDialog.show()
+        }
+
+        btnAlert.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Peringatan!")
+                .setMessage("Apakah kamu yakin ingin melanjutkan?")
+                .setPositiveButton("Ya") { _, _ ->
+                    Toast.makeText(this, "Kamu memilih YA!", Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton("Tidak") { _, _ ->
+                    Toast.makeText(this, "Kamu memilih TIDAK!", Toast.LENGTH_SHORT).show()
+                }
+                .show()
+        }
+    }
+}
+
+'''
